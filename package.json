@@ -1,15 +1,15 @@
 {
-  "name": "sitemap-generator-for-spa",
+  "private": true,
+  "name": "@komura-c/sitemap-generator-for-spa",
   "version": "0.0.1",
   "description": "sitemap generator for spa with puppeteer",
   "repository": "https://github.com/komura-c/sitemap-generator-for-spa",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts",
+    "start": "ts-node src/index.ts",
     "clean": "rimraf dist/*",
     "tsc": "tsc",
     "build": "npm-run-all clean tsc",
-    "start:node": "node .",
     "check-types": "tsc --noEmit",
     "eslint": "eslint src/**/*.ts",
     "eslint:fix": "eslint src/**/*.ts --fix",
@@ -19,7 +19,7 @@
   },
   "keywords": [],
   "author": "komura-c",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/puppeteer": "^5.4.0",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
@@ -36,7 +36,8 @@
     "typescript": "^4.1.2"
   },
   "dependencies": {
-    "puppeteer": "^5.5.0"
+    "puppeteer": "^5.5.0",
+    "sitemap": "^6.3.5"
   },
   "husky": {
     "hooks": {

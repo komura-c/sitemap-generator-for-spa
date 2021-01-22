@@ -13,5 +13,5 @@
     "noEmitOnError": true,
     "noUnusedLocals": true,
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "src/script/.ts"]
 }
