@@ -6,7 +6,9 @@ export const scrapingURL = async (
 ): Promise<string[]> => {
   const browser = await launch();
   const page = await browser.newPage();
-  console.info(URL);
+
+  console.info('Start Scraping: ' + URL);
+
   const allPageURLs = await getAllPageURLs(page, URL, waitSec ? waitSec : 3);
   await browser.close();
   return allPageURLs;
@@ -24,7 +26,9 @@ const getAllPageURLs = async (
     return /^(https|http):\/\//.test(path) ? URL + '/' : URL + path;
   });
   const uniqueURLs = Array.from(new Set(currentURLs));
-  console.info(uniqueURLs);
+
+  console.info('Found URLs: ' + uniqueURLs.toString());
+
   const allPageURLs = await getCurrentPageURLsRecursive(
     page,
     URL,
@@ -47,7 +51,9 @@ const getCurrentPageURLsRecursive = async (
   if (obtainedURLs.length === currentCount) {
     return allPageURLs?.length ? allPageURLs : obtainedURLs;
   }
-  console.info(obtainedURLs[currentCount]);
+
+  console.info('Scraping: ' + obtainedURLs[currentCount]);
+
   await page.goto(obtainedURLs[currentCount], {
     waitUntil: 'domcontentloaded',
   });
@@ -69,16 +75,12 @@ const getCurrentPageURLsRecursive = async (
 };
 
 const getCurrentPageURLs = async (page: Page): Promise<string[]> => {
-  try {
-    return await page.evaluate(() => {
-      const elements = Array.from(document.querySelectorAll('a'));
-      return elements
-        .map((element: Element) => {
-          return element?.getAttribute('href');
-        })
-        .filter((url) => url) as string[];
-    });
-  } catch (error) {
-    throw new Error(error);
-  }
+  return await page.evaluate(() => {
+    const elements = Array.from(document.querySelectorAll('a'));
+    return elements
+      .map((element: Element) => {
+        return element?.getAttribute('href');
+      })
+      .filter((url) => url) as string[];
+  });
 };

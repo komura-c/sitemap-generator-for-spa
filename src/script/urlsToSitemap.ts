@@ -24,6 +24,12 @@ const saveFile = (
   }
   return writeFile(dirPath + filePath, sitemapString, (err) => {
     if (err) throw err;
-    console.info(dirPath + filePath + ' にサイトマップを保存しました');
+
+    console.info(
+      'Success🎉: Saved the sitemap in ' +
+        dirPath +
+        filePath +
+        ', please check it✅'
+    );
   });
 };

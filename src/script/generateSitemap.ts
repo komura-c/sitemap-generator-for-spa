@@ -10,4 +10,3 @@ export const generateSitemap = async (
   });
   if (allURLs) return urlsToSitemap(URL, allURLs);
 };
-export default generateSitemap;
