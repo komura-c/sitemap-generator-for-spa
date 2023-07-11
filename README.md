@@ -1,4 +1,4 @@
-## @komura-c/sitemap-generator-for-spa
+## sitemap-generator-for-spa
 
 this is sample sitemap generator for spa by scraping with puppeteer
 
