@@ -1,12 +1,11 @@
 {
   "private": true,
-  "name": "@komura-c/sitemap-generator-for-spa",
+  "name": "sitemap-generator-for-spa",
   "version": "0.0.1",
   "description": "sitemap generator for spa with puppeteer",
   "repository": "https://github.com/komura-c/sitemap-generator-for-spa",
   "main": "dist/index.js",
   "scripts": {
-    "postinstall": "husky install",
     "start": "ts-node src/index.ts",
     "eslint": "eslint src/**/*.ts",
     "eslint:fix": "eslint src/**/*.ts --fix",
