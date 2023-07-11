@@ -4,7 +4,7 @@ export const scrapingURL = async (
   URL: string,
   waitSec?: number
 ): Promise<string[]> => {
-  const browser = await launch();
+  const browser = await launch({ headless: 'new' });
   const page = await browser.newPage();
 
   console.info('Start Scraping: ' + URL);
@@ -75,12 +75,16 @@ const getCurrentPageURLsRecursive = async (
 };
 
 const getCurrentPageURLs = async (page: Page): Promise<string[]> => {
-  return await page.evaluate(() => {
-    const elements = Array.from(document.querySelectorAll('a'));
+  const bodyHandle = await page.$('body');
+  return await page.evaluate((body) => {
+    if (!body) {
+      return [];
+    }
+    const elements = Array.from(body.querySelectorAll('a'));
     return elements
       .map((element: Element) => {
         return element?.getAttribute('href');
       })
       .filter((url) => url) as string[];
-  });
+  }, bodyHandle);
 };
