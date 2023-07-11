@@ -2,6 +2,8 @@
 
 this is sample sitemap generator for spa by scraping with puppeteer
 
+compatible node.js version: >=16.13.0
+
 ## Usage
 
 ```bash

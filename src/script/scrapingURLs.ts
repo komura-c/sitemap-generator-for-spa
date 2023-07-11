@@ -2,9 +2,9 @@ import { launch, Page } from 'puppeteer';
 
 export const scrapingURL = async (
   URL: string,
-  waitSec?: number
+  waitSec?: number,
 ): Promise<string[]> => {
-  const browser = await launch();
+  const browser = await launch({ headless: 'new' });
   const page = await browser.newPage();
 
   console.info('Start Scraping: ' + URL);
@@ -17,7 +17,7 @@ export const scrapingURL = async (
 const getAllPageURLs = async (
   page: Page,
   URL: string,
-  waitSec: number
+  waitSec: number,
 ): Promise<string[]> => {
   await page.goto(URL, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(waitSec * 1000);
@@ -34,7 +34,7 @@ const getAllPageURLs = async (
     URL,
     uniqueURLs,
     waitSec,
-    []
+    [],
   );
   return Array.from(new Set(allPageURLs));
 };
@@ -45,7 +45,7 @@ const getCurrentPageURLsRecursive = async (
   obtainedURLs: string[],
   waitSec: number,
   allPageURLs: string[],
-  count?: number
+  count?: number,
 ): Promise<string[]> => {
   const currentCount = count ? count : 0;
   if (obtainedURLs.length === currentCount) {
@@ -70,17 +70,21 @@ const getCurrentPageURLsRecursive = async (
     obtainedURLs,
     waitSec,
     allPageURLs,
-    currentCount + 1
+    currentCount + 1,
   );
 };
 
 const getCurrentPageURLs = async (page: Page): Promise<string[]> => {
-  return await page.evaluate(() => {
-    const elements = Array.from(document.querySelectorAll('a'));
+  const bodyHandle = await page.$('body');
+  return await page.evaluate((body) => {
+    if (!body) {
+      return [];
+    }
+    const elements = Array.from(body.querySelectorAll('a'));
     return elements
       .map((element: Element) => {
         return element?.getAttribute('href');
       })
       .filter((url) => url) as string[];
-  });
+  }, bodyHandle);
 };

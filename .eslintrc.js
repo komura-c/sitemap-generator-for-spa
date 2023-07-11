@@ -14,12 +14,6 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'prettier',
-    'prettier/@typescript-eslint',
+    "prettier"
   ],
-  rules: {
-    '@typescript-eslint/no-unsafe-assignment': 'off',
-  },
 };
