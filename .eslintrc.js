@@ -16,7 +16,4 @@ module.exports = {
     'eslint:recommended',
     "prettier"
   ],
-  rules: {
-    '@typescript-eslint/no-unsafe-assignment': 'off',
-  },
 };

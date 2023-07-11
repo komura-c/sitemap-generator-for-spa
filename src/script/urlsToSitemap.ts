@@ -4,7 +4,7 @@ import { writeFile, existsSync, mkdirSync } from 'fs';
 
 export const urlsToSitemap = async (
   URL: string,
-  allURLs: string[]
+  allURLs: string[],
 ): Promise<void> => {
   const links = allURLs.map((url) => {
     return { url, changefreq: 'monthly', priority: 0.5 };
@@ -17,7 +17,7 @@ export const urlsToSitemap = async (
 const saveFile = (
   sitemapString: string,
   dirPath = 'sitemap/',
-  filePath = 'sitemap.xml'
+  filePath = 'sitemap.xml',
 ): void => {
   if (!existsSync(dirPath)) {
     mkdirSync(dirPath);
@@ -29,7 +29,7 @@ const saveFile = (
       'Success🎉: Saved the sitemap in ' +
         dirPath +
         filePath +
-        ', please check it✅'
+        ', please check it✅',
     );
   });
 };

@@ -3,7 +3,7 @@ import { urlsToSitemap } from './urlsToSitemap';
 
 export const generateSitemap = async (
   URL: string,
-  waitSec?: number
+  waitSec?: number,
 ): Promise<void> => {
   const allURLs = await scrapingURL(URL, waitSec).catch((error) => {
     console.error(error);

@@ -2,7 +2,7 @@ import { launch, Page } from 'puppeteer';
 
 export const scrapingURL = async (
   URL: string,
-  waitSec?: number
+  waitSec?: number,
 ): Promise<string[]> => {
   const browser = await launch({ headless: 'new' });
   const page = await browser.newPage();
@@ -17,7 +17,7 @@ export const scrapingURL = async (
 const getAllPageURLs = async (
   page: Page,
   URL: string,
-  waitSec: number
+  waitSec: number,
 ): Promise<string[]> => {
   await page.goto(URL, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(waitSec * 1000);
@@ -34,7 +34,7 @@ const getAllPageURLs = async (
     URL,
     uniqueURLs,
     waitSec,
-    []
+    [],
   );
   return Array.from(new Set(allPageURLs));
 };
@@ -45,7 +45,7 @@ const getCurrentPageURLsRecursive = async (
   obtainedURLs: string[],
   waitSec: number,
   allPageURLs: string[],
-  count?: number
+  count?: number,
 ): Promise<string[]> => {
   const currentCount = count ? count : 0;
   if (obtainedURLs.length === currentCount) {
@@ -70,7 +70,7 @@ const getCurrentPageURLsRecursive = async (
     obtainedURLs,
     waitSec,
     allPageURLs,
-    currentCount + 1
+    currentCount + 1,
   );
 };
 
